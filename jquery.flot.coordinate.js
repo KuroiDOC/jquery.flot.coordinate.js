@@ -317,6 +317,18 @@ Customizations:
         };
 
         var options = plot.getOptions();
+        if(!options.coordinate) {
+            return;
+        }
+        else {
+            options.coordinate = { type: 'default' };
+            options.xaxis.tickFormatter = function (v, axis) {
+                return v;
+            }
+            options.yaxis.tickFormatter = function (v, axis) {
+                return v;
+            }  
+        }
 
         var coords = options.coordinate.type.split("|");
 
@@ -465,23 +477,8 @@ Customizations:
         });
     }
 
-    var options = {
-        coordinate: { type: 'default' },
-        xaxis: {
-            tickFormatter: function (v, axis) {
-                return v;
-            }
-        },
-        yaxis: {
-            tickFormatter: function (v, axis) {
-                return v;
-            }
-        }
-    };
-
     $.plot.plugins.push({
         init: init,
-        options: options,
         name: 'coordinate',
         version: '1.6'
     });
